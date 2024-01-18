@@ -1,9 +1,9 @@
 
-import d from '../../'
+
 export const bodyParts = [
     {
       name: 'back',
-      image: require('../../assets/images/back.png'),
+      image: require('../../assets/back.png'),
     },
     {
       name: 'cardio',

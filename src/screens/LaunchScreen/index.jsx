@@ -1,7 +1,7 @@
-import { Dimensions, Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import {  Image, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { StatusBar } from 'expo-status-bar'
-import Animated, { FadeIn, FadeInDown, FadeOut } from 'react-native-reanimated'
+import Animated, {FadeInDown} from 'react-native-reanimated'
 import { styles } from './styles'
 
 const LaunchScreen = ({navigation}) => {
