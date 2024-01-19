@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
         width :width,
         alignItems:'center'
     },
-    content_container:{
+    content_container:{ 
     },
     gif_container : {
         width : width / 2.4,

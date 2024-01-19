@@ -3,7 +3,6 @@ import axios from 'axios'
 
 
 const apiCall = async(url) => {
-  console.log(url);
     try {
         const options = {
             method : 'GET',

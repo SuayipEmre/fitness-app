@@ -4,32 +4,36 @@ import { fetchExcersisesByBodyPart } from '../../../APIs/exercises'
 import ExercisesContent from '../../components/exercisesContentContainer'
 import { Image } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
+import ExerciseDetailsModal from '../../components/ExerciseDetailsModal'
 
 
-const ExercisesScreen = ({navigation,route}) => {
-    const {bodyPart, image} = route.params
+const ExercisesScreen = ({ navigation, route }) => {
+    const { bodyPart, image } = route.params
     const [exercises, setExercises] = useState([])
+    
 
-    const handleExercises = async() => {
+    const handleExercises = async () => {
         const data = await fetchExcersisesByBodyPart(bodyPart)
         setExercises(data)
-      
     }
-    useEffect(() => {
-        if(bodyPart) handleExercises()
-    },[route])
 
-  return (
-    <View style={{flex : 1, backgroundColor : '#fff',}}>
-        <View style={styles.image_container}>
+
+    useEffect(() => {
+        if (bodyPart) handleExercises()
+    }, [route])
+
+
+    return (
+        <View style={{ flex: 1, backgroundColor: '#fff', }}>
+            <View style={styles.image_container}>
                 <Image source={image} style={styles.image} />
                 <View style={styles.icon_container}>
                     <Ionicons name="caret-back-sharp" size={30} color="white" onPress={() => navigation.goBack()} />
                 </View>
             </View>
-      <ExercisesContent exercises={exercises} />
-    </View>
-  )
+            <ExercisesContent exercises={exercises} />
+        </View>
+    )
 }
 
 export default ExercisesScreen
