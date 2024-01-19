@@ -3,12 +3,15 @@ import React from 'react'
 import { styles } from './styles'
 import { bodyParts } from '../../constants/bodyParts'
 import { useNavigation } from '@react-navigation/native'
+import Animated, { FadeInDown } from 'react-native-reanimated'
+
+
 const BodyPart = () => {
     const navigation = useNavigation()
 
-    const renderListItems = ({ item }) => (
+    const renderListItems = ({ item, index}) => (
 
-        <View >
+        <Animated.View entering={FadeInDown.duration(400).delay(index * 200).springify()} >
             <TouchableOpacity style={styles.button} activeOpacity={.9} onPress={() => navigation.navigate('Exercises', {
                 bodyPart: item.name,
                 image : item.image  
@@ -19,7 +22,7 @@ const BodyPart = () => {
                 <Image source={item.image} style={styles.image} />
 
             </TouchableOpacity>
-        </View>
+        </Animated.View>
     )
 
     return (

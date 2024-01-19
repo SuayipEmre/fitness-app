@@ -2,6 +2,7 @@ import { Dimensions, Modal, ScrollView, StyleSheet, Text, View } from 'react-nat
 import React from 'react'
 import { Image } from 'expo-image'
 import { AntDesign } from '@expo/vector-icons';
+import Animated, { FadeInLeft, FadeInRight, FadeOut } from 'react-native-reanimated';
 const ExerciseDetailsModal = ({ isModalVisible, setIsModalVisible, exerciseDetails }) => {
 
 
@@ -24,29 +25,31 @@ const ExerciseDetailsModal = ({ isModalVisible, setIsModalVisible, exerciseDetai
                 </View>
 
                 <ScrollView contentContainerStyle={styles.content_container} showsVerticalScrollIndicator={false}>
-                    <Text style={styles.name}>{(exerciseDetails?.name)?.toUpperCase()}</Text>
+                    <View >
+                        <Text style={styles.name}>{(exerciseDetails?.name)?.toUpperCase()}</Text>
 
-                    <Text style={styles.title}>
-                        Equipment :
-                        <Text style={styles.subtitle}> {exerciseDetails?.equipment}</Text>
-                    </Text>
+                        <Text style={styles.title}>
+                            Equipment :
+                            <Text style={styles.subtitle}> {exerciseDetails?.equipment}</Text>
+                        </Text>
 
-                    <Text style={styles.title}>
-                        Target :
-                        <Text style={styles.subtitle}> {exerciseDetails?.target}</Text>
-                    </Text>
+                        <Text  style={styles.title}>
+                            Target :
+                            <Text style={styles.subtitle}> {exerciseDetails?.target}</Text>
+                        </Text>
 
+                    </View>
                     {/*   <Text>SecondaryMuscles : {exerciseDetails.secondaryMuscles}</Text> */}
 
 
                     <View style={styles.instructions_container}>
-                        <Text style={styles.instructions_title}>Instructions</Text>
+                        <Animated.Text entering={FadeInRight.delay(400).springify()} style={styles.instructions_title}>Instructions</Animated.Text>
                         {
                             exerciseDetails?.instructions?.map((item, idx) => (
-                                <Text key={item}>{`${idx + 1} - ${item}`}</Text>
+                                <Animated.Text entering={FadeInRight.delay(idx * 400).springify()} key={item}>{`${idx + 1} - ${item}`}</Animated.Text>
                             ))
                         }
-                        
+
                     </View>
                 </ScrollView>
 
@@ -69,7 +72,7 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         width: width,
-        height: height ,
+        height: height,
     },
     gif_container: {
         width: width,
@@ -81,13 +84,13 @@ const styles = StyleSheet.create({
         width: '80%',
         height: '80%',
     },
-    content_container:{
-        paddingHorizontal : 22,
-        gap:12,
+    content_container: {
+        paddingHorizontal: 22,
+        gap: 12,
         paddingBottom: 30,
     },
     name: {
-        fontSize: 30,
+        fontSize: 22,
         fontWeight: '500',
         marginVertical: 12,
     },
@@ -99,16 +102,16 @@ const styles = StyleSheet.create({
         color: '#333',
     },
     instructions_container: {
-        gap : 12
+        gap: 12
     },
     instructions_title: {
         fontSize: 20,
         fontWeight: '400',
     },
-    close_icon:{
-        position :'absolute',
-        right :height * 0.05,
-        top : height * 0.1
+    close_icon: {
+        position: 'absolute',
+        right: height * 0.05,
+        top: height * 0.1
 
     },
 })

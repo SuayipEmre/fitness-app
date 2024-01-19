@@ -1,8 +1,9 @@
-import { FlatList, TouchableOpacity, View } from 'react-native'
+import { FlatList, StatusBar, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import { Image } from 'expo-image';
 import { styles } from './style'
 import ExerciseDetailsModal from '../ExerciseDetailsModal';
+import Animated, { FadeInDown, FadeInLeft } from 'react-native-reanimated';
 
 
 const ExercisesContent = ({ exercises }) => {
@@ -18,19 +19,23 @@ const ExercisesContent = ({ exercises }) => {
 
 
 
-    const renderExerciseItem = ({ item }) => (
-        <TouchableOpacity style={{ margin: 12, }} onPress={() => handleExerciseDetails(item)} >
+    const renderExerciseItem = ({ item, index }) => (
+        < Animated.View entering={FadeInLeft.duration(400).delay(index * 200).springify()}>
+            <TouchableOpacity style={{ margin: 12, }} onPress={() => handleExerciseDetails(item)} >
 
-            <View style={styles.gif_container}>
-                <Image source={item.gifUrl} style={styles.gif} />
-            </View>
+                <View style={styles.gif_container}>
+                    <Image source={item.gifUrl} style={styles.gif} />
+                </View>
 
 
-        </TouchableOpacity>
+            </TouchableOpacity>
+        </Animated.View>
     )
+
     return (
         <View style={styles.container}>
 
+        <StatusBar barStyle='light-content ' />
 
             <FlatList
                 data={exercises}
